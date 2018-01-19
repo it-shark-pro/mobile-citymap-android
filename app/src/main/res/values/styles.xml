@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.Subheading" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Base" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Caption" parent="@android:style/TextAppearance">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Subheading.Bold" parent="TextAppearance.Subheading">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Base.Bold" parent="TextAppearance.Base">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

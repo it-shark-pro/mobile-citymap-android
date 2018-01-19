@@ -1,5 +1,6 @@
 package com.example.android.itsharkandroidproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,8 +14,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener{
 
+    public static String EXTRA_ITEM_NAME = "EXTRA_ITEM_NAME";
+    public static String DEFAULT_ITEM_NAME = "";
+    public static String EXTRA_ITEM_DESCRIPTION = "EXTRA_ITEM_DESCRIPTION";
+    public static String DEFAULT_ITEM_DESCRIPTION = "";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
     @Override
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
-        Toast.makeText(getApplicationContext(), ((ListAdapter)adapter).getItemByPostion(position).getName(), Toast.LENGTH_SHORT).show();
+        final ListItemModel listItemModel = ((ListAdapter) adapter).getItemByPostion(position);
+
+        final Intent detailedActivityIntent = new Intent(this, DetailedActivity.class);
+        detailedActivityIntent.putExtra(EXTRA_ITEM_NAME, listItemModel.getName());
+        detailedActivityIntent.putExtra(EXTRA_ITEM_DESCRIPTION, listItemModel.getDescription());
+
+        startActivity(detailedActivityIntent);
     }
 }
