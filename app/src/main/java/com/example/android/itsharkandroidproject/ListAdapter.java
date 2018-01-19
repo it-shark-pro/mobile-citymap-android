@@ -12,6 +12,7 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private List<ListItemModel> items = new ArrayList<>();
+    private ItemClickListener itemClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -37,7 +38,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public ListItemModel getItemByPostion(final int position) {
+        return items.get(position);
+    }
+
+    public void setItemClickListener(final ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final TextView nameTextView;
         final TextView descriptionTextView;
 
@@ -46,6 +55,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
             nameTextView = itemView.findViewById(R.id.text_view_list_item_title);
             descriptionTextView = itemView.findViewById(R.id.text_view_list_item_description);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View view) {
+            itemClickListener.onItemClick(view, getAdapterPosition(), ListAdapter.this);
         }
     }
 }

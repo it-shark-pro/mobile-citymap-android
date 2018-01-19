@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListAdapter listAdapter = new ListAdapter();
         listRecyclerView.setAdapter(listAdapter);
+        listAdapter.setItemClickListener(this);
 
         final List<ListItemModel> itemModels = initListItemModels();
         listAdapter.update(itemModels);
@@ -50,5 +53,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return items;
+    }
+
+    @Override
+    public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
+        Toast.makeText(getApplicationContext(), ((ListAdapter)adapter).getItemByPostion(position).getName(), Toast.LENGTH_SHORT).show();
     }
 }
