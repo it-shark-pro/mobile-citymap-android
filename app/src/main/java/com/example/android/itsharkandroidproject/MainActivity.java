@@ -6,39 +6,40 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ItemClickListener{
+public class MainActivity extends AppCompatActivity implements ItemClickListener, IMainActivityView{
 
     public static String EXTRA_ITEM_NAME = "EXTRA_ITEM_NAME";
     public static String DEFAULT_ITEM_NAME = "";
     public static String EXTRA_ITEM_DESCRIPTION = "EXTRA_ITEM_DESCRIPTION";
     public static String DEFAULT_ITEM_DESCRIPTION = "";
 
+    private ListAdapter listAdapter;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initList();
+        initRecyclerView();
+
+        final LoadCitiesTask loadCitiesTask = new LoadCitiesTask(this);
+        loadCitiesTask.execute();
     }
 
-    private void initList() {
+    private void initRecyclerView() {
         final RecyclerView listRecyclerView = findViewById(R.id.recycler_view_main_list);
 
         final LinearLayoutManager listLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         listRecyclerView.setLayoutManager(listLayoutManager);
 
-        final ListAdapter listAdapter = new ListAdapter();
+        listAdapter = new ListAdapter();
         listRecyclerView.setAdapter(listAdapter);
         listAdapter.setItemClickListener(this);
-
-        final List<ListItemModel> itemModels = initListItemModels();
-        listAdapter.update(itemModels);
 
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 listRecyclerView.getContext(),
@@ -47,18 +48,10 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         listRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    private List<ListItemModel> initListItemModels() {
-        final int FIRST_ITEM_ID = 1;
-        final int LAST_ITEM_ID = 10;
-
-        final List<ListItemModel> items = new ArrayList<>();
-
-        for (int i = FIRST_ITEM_ID; i <= LAST_ITEM_ID; i++) {
-            final ListItemModel listItemModel = new ListItemModel(i);
-            items.add(listItemModel);
+    public void showCities(final List<ListItemModel> cities) {
+        for (final ListItemModel item : cities) {
+            Log.d("MainActivity", "item " +item.getId() + " " +item.getUrl());
         }
-
-        return items;
     }
 
     @Override
@@ -66,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         final ListItemModel listItemModel = ((ListAdapter) adapter).getItemByPostion(position);
 
         final Intent detailedActivityIntent = new Intent(this, DetailedActivity.class);
-        detailedActivityIntent.putExtra(EXTRA_ITEM_NAME, listItemModel.getName());
+        detailedActivityIntent.putExtra(EXTRA_ITEM_NAME, listItemModel.getTitle());
         detailedActivityIntent.putExtra(EXTRA_ITEM_DESCRIPTION, listItemModel.getDescription());
 
         startActivity(detailedActivityIntent);

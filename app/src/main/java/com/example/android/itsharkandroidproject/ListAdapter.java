@@ -23,7 +23,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ListItemModel itemModel = items.get(position);
-        holder.nameTextView.setText(itemModel.getName());
+        holder.nameTextView.setText(itemModel.getTitle());
         holder.descriptionTextView.setText(itemModel.getDescription());
     }
 
