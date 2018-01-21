@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.models;
 
 public class CityModel {
     private int id;

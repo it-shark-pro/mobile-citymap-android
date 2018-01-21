@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.listeners;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

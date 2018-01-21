@@ -1,6 +1,10 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.server_api;
 
 import android.os.AsyncTask;
+
+import com.example.android.itsharkandroidproject.models.CitiesResponse;
+import com.example.android.itsharkandroidproject.models.CityModel;
+import com.example.android.itsharkandroidproject.ui.main.IMainActivityView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -19,7 +23,7 @@ public class LoadCitiesTask extends AsyncTask<Void, Void, List<CityModel>>{
     private Gson gson;
     private IMainActivityView target;
 
-    LoadCitiesTask(final IMainActivityView target) {
+    public LoadCitiesTask(final IMainActivityView target) {
         this.target = target;
 
         gson = new Gson();

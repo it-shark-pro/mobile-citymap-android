@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.ui.details;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.itsharkandroidproject.ui.main.MainActivity;
+import com.example.android.itsharkandroidproject.R;
 
 public class CityDetailsActivity extends AppCompatActivity {
 

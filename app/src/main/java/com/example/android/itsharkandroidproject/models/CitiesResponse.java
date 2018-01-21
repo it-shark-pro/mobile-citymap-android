@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.models;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.ui.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.example.android.itsharkandroidproject.listeners.ItemClickListener;
+import com.example.android.itsharkandroidproject.R;
+import com.example.android.itsharkandroidproject.models.CityModel;
 
 import java.util.ArrayList;
 import java.util.List;

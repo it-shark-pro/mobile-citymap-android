@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject;
+package com.example.android.itsharkandroidproject.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.android.itsharkandroidproject.listeners.ItemClickListener;
+import com.example.android.itsharkandroidproject.models.CityModel;
+import com.example.android.itsharkandroidproject.server_api.LoadCitiesTask;
+import com.example.android.itsharkandroidproject.R;
+import com.example.android.itsharkandroidproject.ui.details.CityDetailsActivity;
+
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ItemClickListener, IMainActivityView{
+public class MainActivity extends AppCompatActivity implements ItemClickListener, IMainActivityView {
 
     public static String EXTRA_CITY_TITLE = "EXTRA_CITY_TITLE";
     public static String DEFAULT_CITY_TITLE = "";
