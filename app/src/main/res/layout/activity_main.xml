@@ -6,7 +6,7 @@
     tools:context="com.example.android.itsharkandroidproject.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_main_list"
+        android:id="@+id/recycler_view_main_cities_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

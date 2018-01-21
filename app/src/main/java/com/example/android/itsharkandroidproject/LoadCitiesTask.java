@@ -11,7 +11,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoadCitiesTask extends AsyncTask<Void, Void, List<ListItemModel>>{
+public class LoadCitiesTask extends AsyncTask<Void, Void, List<CityModel>>{
     private final String API_URL = "https://api.myjson.com/bins/upt7z";
 
     private OkHttpClient client;
@@ -30,8 +30,8 @@ public class LoadCitiesTask extends AsyncTask<Void, Void, List<ListItemModel>>{
     }
 
     @Override
-    protected List<ListItemModel> doInBackground(final Void... voids) {
-        List<ListItemModel> listItemModelsResponse = Collections.emptyList();
+    protected List<CityModel> doInBackground(final Void... voids) {
+        List<CityModel> cityModelsResponse = Collections.emptyList();
 
         try {
             final Response response = client.newCall(request).execute();
@@ -39,16 +39,16 @@ public class LoadCitiesTask extends AsyncTask<Void, Void, List<ListItemModel>>{
             if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
             final String responseBodyString = response.body().string();
-            listItemModelsResponse = gson.fromJson(responseBodyString, ListItemModelsResponse.class).getPhotos();
+            cityModelsResponse = gson.fromJson(responseBodyString, CitiesResponse.class).getPhotos();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return listItemModelsResponse;
+        return cityModelsResponse;
     }
 
     @Override
-    protected void onPostExecute(final List<ListItemModel> listItemModelsResponse) {
-        target.showCities(listItemModelsResponse);
+    protected void onPostExecute(final List<CityModel> cityModelsResponse) {
+        target.showCities(cityModelsResponse);
     }
 }

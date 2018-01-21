@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_view_detailed_name"
+            android:id="@+id/text_view_city_details_title"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             tools:text="Item 5"/>
 
         <TextView
-            android:id="@+id/text_view_detailed_description"
+            android:id="@+id/text_view_city_details_description"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

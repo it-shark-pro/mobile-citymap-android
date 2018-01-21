@@ -9,37 +9,37 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
-    private List<ListItemModel> items = new ArrayList<>();
+    private List<CityModel> cities = new ArrayList<>();
     private ItemClickListener itemClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_item, parent, false);
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_city_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final ListItemModel itemModel = items.get(position);
-        holder.nameTextView.setText(itemModel.getTitle());
-        holder.descriptionTextView.setText(itemModel.getDescription());
+        final CityModel cityModel = cities.get(position);
+        holder.titleTextView.setText(cityModel.getTitle());
+        holder.descriptionTextView.setText(cityModel.getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return cities.size();
     }
 
-    public void update(final List<ListItemModel> items) {
-        this.items.clear();
-        this.items.addAll(items);
+    public void update(final List<CityModel> items) {
+        this.cities.clear();
+        this.cities.addAll(items);
         notifyDataSetChanged();
     }
 
-    public ListItemModel getItemByPostion(final int position) {
-        return items.get(position);
+    public CityModel getItemByPosition(final int position) {
+        return cities.get(position);
     }
 
     public void setItemClickListener(final ItemClickListener itemClickListener) {
@@ -47,21 +47,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        final TextView nameTextView;
+        final TextView titleTextView;
         final TextView descriptionTextView;
 
         ViewHolder(final View itemView) {
             super(itemView);
 
-            nameTextView = itemView.findViewById(R.id.text_view_list_item_title);
-            descriptionTextView = itemView.findViewById(R.id.text_view_list_item_description);
+            titleTextView = itemView.findViewById(R.id.text_view_city_title);
+            descriptionTextView = itemView.findViewById(R.id.text_view_city_description);
 
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(final View view) {
-            itemClickListener.onItemClick(view, getAdapterPosition(), ListAdapter.this);
+            itemClickListener.onItemClick(view, getAdapterPosition(), CityAdapter.this);
         }
     }
 }

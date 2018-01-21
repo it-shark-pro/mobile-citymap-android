@@ -13,12 +13,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener, IMainActivityView{
 
-    public static String EXTRA_ITEM_NAME = "EXTRA_ITEM_NAME";
-    public static String DEFAULT_ITEM_NAME = "";
-    public static String EXTRA_ITEM_DESCRIPTION = "EXTRA_ITEM_DESCRIPTION";
-    public static String DEFAULT_ITEM_DESCRIPTION = "";
+    public static String EXTRA_CITY_TITLE = "EXTRA_CITY_TITLE";
+    public static String DEFAULT_CITY_TITLE = "";
+    public static String EXTRA_CITY_DESCRIPTION = "EXTRA_CITY_DESCRIPTION";
+    public static String DEFAULT_CITY_DESCRIPTION = "";
 
-    private ListAdapter listAdapter;
+    private CityAdapter cityAdapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -32,35 +32,35 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     }
 
     private void initRecyclerView() {
-        final RecyclerView listRecyclerView = findViewById(R.id.recycler_view_main_list);
+        final RecyclerView citiesRecyclerView = findViewById(R.id.recycler_view_main_cities_list);
 
-        final LinearLayoutManager listLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        listRecyclerView.setLayoutManager(listLayoutManager);
+        final LinearLayoutManager citiesLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        citiesRecyclerView.setLayoutManager(citiesLayoutManager);
 
-        listAdapter = new ListAdapter();
-        listRecyclerView.setAdapter(listAdapter);
-        listAdapter.setItemClickListener(this);
+        cityAdapter = new CityAdapter();
+        citiesRecyclerView.setAdapter(cityAdapter);
+        cityAdapter.setItemClickListener(this);
 
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                listRecyclerView.getContext(),
-                listLayoutManager.getOrientation()
+                citiesRecyclerView.getContext(),
+                citiesLayoutManager.getOrientation()
         );
-        listRecyclerView.addItemDecoration(dividerItemDecoration);
+        citiesRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    public void showCities(final List<ListItemModel> cities) {
-        for (final ListItemModel item : cities) {
+    public void showCities(final List<CityModel> cities) {
+        for (final CityModel item : cities) {
             Log.d("MainActivity", "item " +item.getId() + " " +item.getUrl());
         }
     }
 
     @Override
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
-        final ListItemModel listItemModel = ((ListAdapter) adapter).getItemByPostion(position);
+        final CityModel cityModel = ((CityAdapter) adapter).getItemByPosition(position);
 
-        final Intent detailedActivityIntent = new Intent(this, DetailedActivity.class);
-        detailedActivityIntent.putExtra(EXTRA_ITEM_NAME, listItemModel.getTitle());
-        detailedActivityIntent.putExtra(EXTRA_ITEM_DESCRIPTION, listItemModel.getDescription());
+        final Intent detailedActivityIntent = new Intent(this, CityDetailsActivity.class);
+        detailedActivityIntent.putExtra(EXTRA_CITY_TITLE, cityModel.getTitle());
+        detailedActivityIntent.putExtra(EXTRA_CITY_DESCRIPTION, cityModel.getDescription());
 
         startActivity(detailedActivityIntent);
     }
