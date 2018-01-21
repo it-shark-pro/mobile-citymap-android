@@ -27,4 +27,8 @@
     <style name="TextAppearance.Base.Bold" parent="TextAppearance.Base">
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="TextAppearance.Base.Bold.White" parent="TextAppearance.Base.Bold">
+        <item name="android:textColor">@color/White</item>
+    </style>
 </resources>

@@ -1,13 +1,16 @@
 package com.example.android.itsharkandroidproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,8 +18,9 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
     public static String EXTRA_CITY_TITLE = "EXTRA_CITY_TITLE";
     public static String DEFAULT_CITY_TITLE = "";
-    public static String EXTRA_CITY_DESCRIPTION = "EXTRA_CITY_DESCRIPTION";
-    public static String DEFAULT_CITY_DESCRIPTION = "";
+    public static String EXTRA_CITY_URL = "EXTRA_CITY_URL";
+    public static String DEFAULT_CITY_URL = "";
+    private final String NO_INTERNET_MESSAGE = "Please, make sure that mobile internet or WIFI is enabled";
 
     private CityAdapter cityAdapter;
 
@@ -27,31 +31,27 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
         initRecyclerView();
 
-        final LoadCitiesTask loadCitiesTask = new LoadCitiesTask(this);
-        loadCitiesTask.execute();
+        if (isNetworkAvailable()) {
+            final LoadCitiesTask loadCitiesTask = new LoadCitiesTask(this);
+            loadCitiesTask.execute();
+        } else {
+            showInternetConnectionErrorMessage();
+        }
     }
 
     private void initRecyclerView() {
         final RecyclerView citiesRecyclerView = findViewById(R.id.recycler_view_main_cities_list);
 
-        final LinearLayoutManager citiesLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager citiesLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
         citiesRecyclerView.setLayoutManager(citiesLayoutManager);
 
-        cityAdapter = new CityAdapter();
+        cityAdapter = new CityAdapter(getApplicationContext());
         citiesRecyclerView.setAdapter(cityAdapter);
         cityAdapter.setItemClickListener(this);
-
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                citiesRecyclerView.getContext(),
-                citiesLayoutManager.getOrientation()
-        );
-        citiesRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     public void showCities(final List<CityModel> cities) {
-        for (final CityModel item : cities) {
-            Log.d("MainActivity", "item " +item.getId() + " " +item.getUrl());
-        }
+        cityAdapter.update(cities);
     }
 
     @Override
@@ -60,8 +60,21 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
         final Intent detailedActivityIntent = new Intent(this, CityDetailsActivity.class);
         detailedActivityIntent.putExtra(EXTRA_CITY_TITLE, cityModel.getTitle());
-        detailedActivityIntent.putExtra(EXTRA_CITY_DESCRIPTION, cityModel.getDescription());
+        detailedActivityIntent.putExtra(EXTRA_CITY_URL, cityModel.getUrl());
 
         startActivity(detailedActivityIntent);
+    }
+
+    private boolean isNetworkAvailable() {
+        final ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null) {return false;}
+
+        final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    private void showInternetConnectionErrorMessage() {
+        Toast.makeText(getApplicationContext(), NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show();
     }
 }
