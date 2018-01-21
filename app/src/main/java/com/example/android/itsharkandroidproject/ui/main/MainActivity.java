@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.itsharkandroidproject.listeners.ItemClickListener;
 import com.example.android.itsharkandroidproject.models.CityModel;
 import com.example.android.itsharkandroidproject.R;
+import com.example.android.itsharkandroidproject.ui.MapActivity;
 import com.example.android.itsharkandroidproject.ui.details.CityDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener, IMainActivityView {
@@ -24,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     public static String DEFAULT_CITY_TITLE = "";
     public static String EXTRA_CITY_URL = "EXTRA_CITY_URL";
     public static String DEFAULT_CITY_URL = "";
+    public static String EXTRA_CITIES = "EXTRA_CITIES";
     private final String REQUEST_ERROR_MESSAGE = "An error occurred while retrieving data from server";
+    private List<CityModel> cities;
 
     private MainPresenter presenter;
     private Context appContext;
@@ -54,10 +59,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     }
 
     public void showCities(final List<CityModel> cities) {
-        for (final CityModel model :cities) {
-            Log.d("TestPish", " title " + model.getTitle() + " url " +model.getUrl());
-        }
-
+        this.cities = cities;
         cityAdapter.update(cities);
     }
 
@@ -70,6 +72,25 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         detailedActivityIntent.putExtra(EXTRA_CITY_URL, cityModel.getUrl());
 
         startActivity(detailedActivityIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_on_map:
+                final Intent intent = new Intent(this, MapActivity.class);
+                intent.putExtra(EXTRA_CITIES, (ArrayList)cities);
+                startActivity(intent);
+            break;
+        }
+
+        return true;
     }
 
     public void showServerRequestFailed() {

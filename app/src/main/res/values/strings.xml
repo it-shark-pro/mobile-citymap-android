@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ITSharkAndroidProject</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_main_menu_show_on_map">Show on Map</string>
 </resources>

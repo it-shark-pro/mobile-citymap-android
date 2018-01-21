@@ -1,6 +1,8 @@
 package com.example.android.itsharkandroidproject.models;
 
-public class CityModel {
+import java.io.Serializable;
+
+public class CityModel implements Serializable{
     private int id;
     private String title;
     private String description;
