@@ -43,8 +43,8 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.MapActivity"
-            android:label="@string/title_activity_map" />
+            android:name=".ui.map.MapActivity"
+            android:label="@string/title_activity_map"/>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.android.itsharkandroidproject.listeners.ItemClickListener;
 import com.example.android.itsharkandroidproject.models.CityModel;
 import com.example.android.itsharkandroidproject.R;
-import com.example.android.itsharkandroidproject.ui.MapActivity;
+import com.example.android.itsharkandroidproject.ui.map.MapActivity;
 import com.example.android.itsharkandroidproject.ui.details.CityDetailsActivity;
 
 import java.util.ArrayList;

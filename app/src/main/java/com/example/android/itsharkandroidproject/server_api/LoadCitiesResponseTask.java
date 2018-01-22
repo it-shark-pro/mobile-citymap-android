@@ -10,7 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class LoadCitiesResponseTask extends AsyncTask<Void, Void, String>{
-    private final String API_URL = "https://api.myjson.com/bins/upt7z";
+    private final String API_URL = "https://api.myjson.com/bins/7ybe5";
 
     private OkHttpClient client;
     private Request request;

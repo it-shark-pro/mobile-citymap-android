@@ -1,4 +1,4 @@
-package com.example.android.itsharkandroidproject.ui;
+package com.example.android.itsharkandroidproject.ui.map;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
