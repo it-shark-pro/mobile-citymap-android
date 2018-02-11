@@ -11,6 +11,10 @@
 * Оффлайн доступ к данным;
 * Отображение городов на мировой карте.
 
+<p align="center"> 
+<img src="/pictures/logo.jpg">
+</p>
+
 ### Для чего?
 
 Если вас когда-либо интересовала нативная разработка для мобильных устройств на платформе **Android** и Вы хотели бы попробовать себя в этом, то вы можете попробовать начать изучение используя материалы из данного репозитория.
@@ -55,6 +59,8 @@
 
 Результат, который должен получиться: [GitHub](https://github.com/it-shark-pro/mobile-citymap-android/tree/part1)
 
+<img src="pictures/part1_1.png" width="300"> <img src="pictures/part1_2.png" width="300">
+
 #### Часть 2
 
 **Основные понятия**: `Threading`, `ThreadPool`, `AsyncTasks`, `Loaders`, `REST Api`, `Http Request`, `Json`, `Bitmap`, `Drawable`.
@@ -67,6 +73,8 @@
 **Дополнительно**: `OkHttp`, `Retrofit`, `Gson`, `Jackson`, `RxJava`/`RxAndroid`, `VectorDrawable`
 
 Результат, который должен получиться: [GitHub](https://github.com/it-shark-pro/mobile-citymap-android/tree/part2)
+
+<img src="pictures/part2_1.png" width="300"> <img src="pictures/part2_2.png" width="300"> <img src="pictures/part2_3.png" width="300">
 
 
 #### Часть 3
@@ -87,7 +95,16 @@
 
 Результат, который должен получиться: [GitHub](https://github.com/it-shark-pro/mobile-citymap-android/tree/part4)
 
-### Туториал
+## Туториал
+
+**Tip** - небольшие советы по разработке.
+
+**WKM** - информация для углубленного изучения.
+
+<p align="center"> 
+<img src="/pictures/WKM.jpg">
+</p>
+
 #### Часть 0 и Часть 1
 
 1. Создадим новый проект со стартовым экраном `EmptyActivity`.
